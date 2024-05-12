@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  server:
+    container_name: flavor_fusion_backend_service
+    build:
+      context: ./backend
+      dockerfile: dev.Dockerfile
+    logging:
+      options:
+        max-size: 10m
+    command: npm run start:dev
+    platform: linux/amd64
+    volumes:
+      - ./backend:/app:delegated
+      - /app/node_modules
+    ports:
+      - 8083:8080
+    depends_on:
+      - db-service
+    networks:
+      - flavor_service_network
+
+  db-service:
+    container_name: db-service
+    image: postgres:11
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: app_dev
+      POSTGRES_PASSWORD: password
+    volumes:
+      - 'db-service:/var/lib/postgresql/data:z'
+    networks:
+      - flavor_service_network
+
+networks:
+  flavor_service_network:
+
+volumes:
+  db-service:
