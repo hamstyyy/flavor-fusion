@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './database/entities/User.entity';
+import { User } from '@entities/User.entity';
 import { PassportModule } from '@nestjs/passport';
-import { DatabaseConfigModule } from './config/database/database-config.module';
-import { DatabaseConfigService } from './config/database/database-config.service';
-import { AppConfigModule } from './config/app/app-config.module';
+import { DatabaseConfigModule } from '@database-config/database-config.module';
+import { DatabaseConfigService } from '@database-config/database-config.service';
+import { AppConfigModule } from '@app-config/app-config.module';
 
 @Module({
   imports: [

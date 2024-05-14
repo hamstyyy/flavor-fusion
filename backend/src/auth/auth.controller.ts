@@ -9,8 +9,8 @@ import {
   Response,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateUserDto } from 'src/users/dto/user.dto';
-import { LocalAuthGuard } from 'src/guards/local-auth.guard';
+import { CreateUserDto } from '../users/dto/user.dto';
+import { LocalAuthGuard } from '@guards/local-auth.guard';
 import { Response as ResponseExpress } from 'express';
 
 @Controller('/auth')
