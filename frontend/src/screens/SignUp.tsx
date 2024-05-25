@@ -7,8 +7,12 @@ import {Button} from 'react-native-paper';
 import FormInput from '../components/FormInput';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {z} from 'zod';
+import {useAuthStore} from '../store/auth';
+import {User} from '../interfaces';
 
 const SignUp = ({navigation}: any) => {
+  const {signUp} = useAuthStore();
+
   const formSchema = z.object({
     firstName: z.string(),
     lastName: z.string(),
@@ -26,8 +30,8 @@ const SignUp = ({navigation}: any) => {
     resolver: zodResolver(formSchema.required()),
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data, 'DATA');
+  const onSubmit = async (data: User) => {
+    await signUp(data);
   };
 
   return (
@@ -46,11 +50,12 @@ const SignUp = ({navigation}: any) => {
         mode="contained"
         onPress={handleSubmit(onSubmit)}
         buttonColor={COLORS.ORANGE}>
-        Submit
+        Signup
       </Button>
-      <View style={styles.registerContainer}>
+      <View style={styles.loginContainer}>
+        <Text>Already have an account?</Text>
         <Pressable onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.registerRedirectLink}>Sign up</Text>
+          <Text style={styles.registerRedirectLink}>Sign In</Text>
         </Pressable>
       </View>
     </View>
@@ -72,7 +77,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.lato_bold,
     fontSize: 20,
   },
-  registerContainer: {
+  loginContainer: {
     display: 'flex',
     flexDirection: 'row',
     width: '100%',

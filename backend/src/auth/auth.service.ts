@@ -2,8 +2,8 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/users/dto/user.dto';
-import { DecryptedToken } from 'src/interfaces/decrypted-token.interface';
-import { User } from 'src/database/entities/User.entity';
+import { DecryptedToken } from '@interfaces/decrypted-token.interface';
+import { User } from '@entities/User.entity';
 
 @Injectable()
 export class AuthService {
@@ -12,29 +12,24 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signIn(email: string, pass: string): Promise<{ access_token: string }> {
+  async signIn(email: string, pass: string): Promise<UserInfo> {
     const user = await this.usersService.findOne(email);
     if (user?.password !== pass) {
       throw new UnauthorizedException();
     }
-    const payload = { sub: user.id, email: user.email };
-    return {
-      access_token: await this.jwtService.signAsync(payload),
-    };
+
+    return this.generateJwtToken(user);
   }
 
-  async signUp(userinfo: CreateUserDto): Promise<{ access_token: string }> {
+  async signUp(userinfo: CreateUserDto): Promise<UserInfo> {
     const createdUser = await this.usersService.create(userinfo);
 
-    const payload = { sub: createdUser.id, email: createdUser.email };
-
-    return {
-      access_token: await this.jwtService.signAsync(payload),
-    };
+    return this.generateJwtToken(createdUser);
   }
 
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(email);
+
     if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;
@@ -42,7 +37,7 @@ export class AuthService {
     return null;
   }
 
-  createJwtToken(user: User): UserInfo {
+  private async generateJwtToken(user: User): Promise<UserInfo> {
     const { firstName, lastName, email, id } = user;
 
     const token: DecryptedToken = {
@@ -55,11 +50,12 @@ export class AuthService {
     const jwt = this.jwtService.sign(token, { secret: 'some-super-secret' });
     return {
       jwt,
-      ...token,
+      user: { ...token },
     };
   }
 }
 
-export interface UserInfo extends DecryptedToken {
+export interface UserInfo {
   jwt: string;
+  user: DecryptedToken;
 }

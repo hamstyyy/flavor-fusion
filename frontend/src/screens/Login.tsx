@@ -7,8 +7,16 @@ import {Button} from 'react-native-paper';
 import FormInput from '../components/FormInput';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {z} from 'zod';
+import {useAuthStore} from '../store/auth';
+
+type LoginProps = {
+  email: string;
+  password: string;
+};
 
 const Login = ({navigation}: any) => {
+  const {login} = useAuthStore();
+
   const formSchema = z.object({
     email: z.string().email('Please, enter a valid email address'),
     password: z.string().min(6, 'Password should be at least 6 characters'),
@@ -22,8 +30,9 @@ const Login = ({navigation}: any) => {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data, 'DATA');
+  const onSubmit = async (data: LoginProps) => {
+    console.log('ON SUBMIT');
+    await login(data.email, data.password);
   };
 
   return (
@@ -42,7 +51,7 @@ const Login = ({navigation}: any) => {
         mode="contained"
         onPress={handleSubmit(onSubmit)}
         buttonColor={COLORS.ORANGE}>
-        Submit
+        Login
       </Button>
       <View style={styles.registerContainer}>
         <Text>New to Flavor?</Text>

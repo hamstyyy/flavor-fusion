@@ -27,6 +27,7 @@ const FormInput = ({
             style={styles.input}
             value={value}
             onChangeText={onChange}
+            autoCapitalize="none"
             {...otherProps}
           />
           {error && <Text style={styles.errMessage}>{error.message}</Text>}

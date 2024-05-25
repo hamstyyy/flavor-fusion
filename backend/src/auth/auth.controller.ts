@@ -5,7 +5,6 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
-  Request,
   Response,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -19,16 +18,26 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('/login')
-  async signIn(@Request() req, @Response() res: ResponseExpress) {
-    const userInfo = await this.authService.createJwtToken(req.user);
+  async signIn(
+    @Body('email') email: string,
+    @Body('password') password: string,
+    @Response() res: ResponseExpress,
+  ) {
+    const userInfo = await this.authService.signIn(email, password);
     res.setHeader('jwt-token', userInfo.jwt);
 
-    return res.json({ status: 'OK' });
+    return res.json(userInfo.user);
   }
 
   @HttpCode(HttpStatus.OK)
   @Post('/sign-up')
-  signUp(@Body() signUpDto: CreateUserDto) {
-    return this.authService.signUp(signUpDto);
+  async signUp(
+    @Body() signUpDto: CreateUserDto,
+    @Response() res: ResponseExpress,
+  ) {
+    const userinfo = await this.authService.signUp(signUpDto);
+    res.setHeader('jwt-token', userinfo.jwt);
+
+    return res.json(userinfo.user);
   }
 }

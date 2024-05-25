@@ -13,6 +13,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix('rest/api');
   app.useBodyParser('json', { limit: '10mb' });
+  app.enableCors({ origin: '*' });
   const configService: AppConfigService = app.get(AppConfigService);
   const port = configService.port;
 
