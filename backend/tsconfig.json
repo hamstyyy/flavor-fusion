@@ -19,7 +19,7 @@
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
     "paths": {
-      "@entities/*": ["src/database/entities/*"],
+      "@entities": ["src/database/entities"],
       "@interfaces/*": ["src/interfaces/*"],
       "@helpers/*": ["src/helpers/*"],
       "@database-config/*": ["src/config/database/*"],

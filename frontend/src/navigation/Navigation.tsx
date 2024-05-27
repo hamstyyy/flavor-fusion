@@ -4,19 +4,13 @@ import {CommonActions} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigation} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Home from '../screens/Home';
-import Favourites from '../screens/Favourites';
-import ShoppingList from '../screens/ShoppingList';
-import Settings from '../screens/Settings';
+import {Home, Favourites, ShoppingList, Settings} from '../screens';
 
 const Tab = createBottomTabNavigator();
 
 const Navigation = () => {
   return (
     <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
       tabBar={({navigation, state, descriptors, insets}) => (
         <BottomNavigation.Bar
           navigationState={state}

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {StyleSheet, View, Text, Pressable} from 'react-native';
 import {useForm} from 'react-hook-form';
-import {COLORS} from '../styles/colors';
-import {FontFamily} from '../styles/typography';
+import {COLORS, FontFamily} from '../styles';
 import {Button} from 'react-native-paper';
-import FormInput from '../components/FormInput';
+import {FormInput} from '../components';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import {useAuthStore} from '../store/auth';
@@ -30,9 +29,12 @@ const SignUp = ({navigation}: any) => {
     resolver: zodResolver(formSchema.required()),
   });
 
-  const onSubmit = async (data: User) => {
-    await signUp(data);
-  };
+  const onSubmit = useCallback(
+    async (data: User) => {
+      await signUp(data);
+    },
+    [signUp],
+  );
 
   return (
     <View style={styles.container}>

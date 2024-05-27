@@ -1,2 +1,3 @@
-export * as Buttons from './buttons';
-export * as Typography from './typography';
+export * from './buttons';
+export * from './colors';
+export * from './typography';

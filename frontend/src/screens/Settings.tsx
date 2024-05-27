@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {useAuthStore} from '../store/auth';
-import {COLORS} from '../styles/colors';
+import {COLORS} from '../styles';
 import {Button} from 'react-native-paper';
 
 interface SettingsProps {}

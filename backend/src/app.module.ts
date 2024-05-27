@@ -2,12 +2,11 @@ import { Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from '@entities/User.entity';
+import { User, Recipe, Rating } from '@entities';
 import { PassportModule } from '@nestjs/passport';
 import { DatabaseConfigModule } from '@database-config/database-config.module';
 import { DatabaseConfigService } from '@database-config/database-config.service';
 import { AppConfigModule } from '@app-config/app-config.module';
-
 @Module({
   imports: [
     AppConfigModule,
@@ -25,7 +24,7 @@ import { AppConfigModule } from '@app-config/app-config.module';
         logging: false,
         username: databaseConfigService.user,
         password: databaseConfigService.password,
-        entities: [User],
+        entities: [User, Recipe, Rating],
         synchronize: true,
       }),
       inject: [DatabaseConfigService],
