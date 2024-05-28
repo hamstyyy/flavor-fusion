@@ -7,6 +7,10 @@ import { PassportModule } from '@nestjs/passport';
 import { DatabaseConfigModule } from '@database-config/database-config.module';
 import { DatabaseConfigService } from '@database-config/database-config.service';
 import { AppConfigModule } from '@app-config/app-config.module';
+import {
+  CreateTables1716803036450,
+  Seed1716907720437,
+} from './database/migrations';
 @Module({
   imports: [
     AppConfigModule,
@@ -25,7 +29,9 @@ import { AppConfigModule } from '@app-config/app-config.module';
         username: databaseConfigService.user,
         password: databaseConfigService.password,
         entities: [User, Recipe, Rating],
-        synchronize: true,
+        migrations: [CreateTables1716803036450, Seed1716907720437],
+        migrationsRun: true,
+        synchronize: false,
       }),
       inject: [DatabaseConfigService],
     }),

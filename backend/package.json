@@ -25,7 +25,8 @@
     "@helpers": "dist/helpers",
     "@database-config": "dist/config/database",
     "@app-config": "dist/config/app",
-    "@guards": "dist/guards"
+    "@guards": "dist/guards",
+    "@seeds": "dist/database/seeds"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

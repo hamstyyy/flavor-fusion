@@ -1,9 +1,15 @@
-import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Recipe } from './Recipe.entity';
 
 @Entity()
 export class Rating {
-  @PrimaryColumn({ type: 'uuid', generated: 'uuid' })
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
@@ -13,11 +19,11 @@ export class Rating {
   description: string;
 
   @Column()
-  createdAt: string;
+  createdAt: Date;
 
   @ManyToOne(() => Recipe, (recipe) => recipe.ratings, {
     cascade: true,
   })
   @JoinColumn({ name: 'recipe' })
-  recipe!: string;
+  recipe?: Recipe;
 }

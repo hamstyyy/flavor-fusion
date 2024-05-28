@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Recipe } from './Recipe.entity';
 
 @Entity()
 export class User {
-  @PrimaryColumn({ type: 'uuid', generated: 'uuid' })
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
@@ -19,5 +19,5 @@ export class User {
   password: string;
 
   @OneToMany(() => Recipe, (recipe) => recipe.author)
-  recipes!: Recipe[];
+  recipes: Recipe[];
 }

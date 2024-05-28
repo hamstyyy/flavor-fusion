@@ -24,7 +24,8 @@
       "@helpers/*": ["src/helpers/*"],
       "@database-config/*": ["src/config/database/*"],
       "@app-config/*": ["src/config/app/*"],
-      "@guards/*": ["src/guards/*"]
+      "@guards/*": ["src/guards/*"],
+      "@seeds": ["src/database/seeds"]
     }
   }
 }

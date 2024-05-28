@@ -1,17 +1,17 @@
 import {
   Entity,
   Column,
-  PrimaryColumn,
   ManyToOne,
   JoinColumn,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from './User.entity';
 import { Rating } from './Rating.entity';
 
 @Entity()
 export class Recipe {
-  @PrimaryColumn({ type: 'uuid', generated: 'uuid' })
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
@@ -27,8 +27,8 @@ export class Recipe {
     cascade: true,
   })
   @JoinColumn({ name: 'author' })
-  author!: string;
+  author: User;
 
   @OneToMany(() => Rating, (rating) => rating.recipe)
-  ratings!: Rating[];
+  ratings: Rating[];
 }
