@@ -2,7 +2,7 @@ import { Body, Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Controller('/users')
-export class AuthController {
+export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @HttpCode(HttpStatus.OK)

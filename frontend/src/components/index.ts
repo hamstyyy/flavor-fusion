@@ -1,3 +1,4 @@
 import FormInput from './FormInput';
+import RecipeCard from './RecipeCard';
 
-export {FormInput};
+export {FormInput, RecipeCard};

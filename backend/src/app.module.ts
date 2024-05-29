@@ -11,11 +11,13 @@ import {
   CreateTables1716803036450,
   Seed1716907720437,
 } from './database/migrations';
+import { RecipesModule } from './recipes/recipes.module';
 @Module({
   imports: [
     AppConfigModule,
     AuthModule,
     UsersModule,
+    RecipesModule,
     PassportModule,
     TypeOrmModule.forRootAsync({
       imports: [DatabaseConfigModule],
