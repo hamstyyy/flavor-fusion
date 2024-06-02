@@ -3,7 +3,7 @@ import {User} from './user.interfaces';
 export interface Recipe {
   id: number;
   title: string;
-  duration: string;
+  duration: number;
   servings: number;
   ratings?: Rating[];
   author?: User;

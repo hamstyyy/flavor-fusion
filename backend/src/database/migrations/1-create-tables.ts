@@ -10,7 +10,8 @@ export class CreateTables1716803036450 implements MigrationInterface {
         "firstName" VARCHAR(255) NOT NULL,
         "lastName" VARCHAR(255) NOT NULL,
         "email" VARCHAR(255) NOT NULL,
-        "password" VARCHAR(255) NOT NULL
+        "password" VARCHAR(255) NOT NULL,
+        "avatar" VARCHAR(255)
       )
     `);
 

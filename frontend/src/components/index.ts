@@ -1,4 +1,5 @@
 import FormInput from './FormInput';
 import RecipeCard from './RecipeCard';
+import Rating from './Rating';
 
-export {FormInput, RecipeCard};
+export {FormInput, RecipeCard, Rating};

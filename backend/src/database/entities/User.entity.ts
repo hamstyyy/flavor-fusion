@@ -18,6 +18,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  avatar: string;
+
   @OneToMany(() => Recipe, (recipe) => recipe.author)
   recipes: Recipe[];
 }
